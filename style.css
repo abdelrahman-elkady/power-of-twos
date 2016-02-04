@@ -18,3 +18,19 @@
   width: 100%;
   bottom: 20px;
 }
+
+#number:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+
+#number:focus:-moz-placeholder {
+  color: transparent;
+}
+
+#number:focus::-moz-placeholder {
+  color: transparent;
+}
+
+#number:focus:-ms-input-placeholder {
+  color: transparent;
+}

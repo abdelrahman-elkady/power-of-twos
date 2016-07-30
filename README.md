@@ -1,3 +1,3 @@
-Decomposing a power of twos in fashion !
+Decomposing a power of two in style !
 
 Yet another **useless** page anywayas 

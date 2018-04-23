@@ -1,43 +1,45 @@
-var voices = [];
+const q = document.querySelector.bind(document);
+let voices = [];
+
 window.speechSynthesis.onvoiceschanged = function() {
   voices = window.speechSynthesis.getVoices();
 }
 
+const powerOfTwo = n => (n > 1) && ((n & (n - 1)) === 0);
 
-function run() {
-
+function speak() {
   if ('speechSynthesis' in window) {
-    var number = parseInt($('#number').val());
+    const number = parseInt(q('#number').value);
 
     if (powerOfTwo(number) && !isNaN(number)) {
-      var message = "" + number + " which is 2";
+      let message = `${number} which is 2`;
+
       for (var i = 4; i <= number; i *= 2) {
-        message += " times 2 ";
+        message += ' times 2 ';
       }
 
-      var msg = new SpeechSynthesisUtterance(message);
-      msg.voice = voices.filter(function(voice) {
+      const voiceMessage = new SpeechSynthesisUtterance(message);
+      voiceMessage.voice = voices.filter(function(voice) {
         return voice.name == 'Google UK English Male';
       })[0];
 
-      window.speechSynthesis.speak(msg);
+      window.speechSynthesis.speak(voiceMessage);
 
     }
   } else {
-    console.log("Something went wrong");
+    console.log('Something went wrong');
   }
 
 }
 
-function powerOfTwo(n) {
-  return (n > 1) && ((n & (n - 1)) == 0);
-}
+q('#speak_button').addEventListener('click', speak);
 
-$('#number').on('input', function() {
-  var data = $(this).val();
+q('#number').addEventListener('input', event => {
+  const data = event.target.value;
+
   if (!powerOfTwo(data)) {
-    $("#power_validation").removeClass('hidden');
+    q('#power_validation').classList.remove('hidden');
   } else {
-    $("#power_validation").addClass('hidden');
+    q('#power_validation').classList.add('hidden');
   }
 });
